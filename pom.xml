@@ -1,0 +1,157 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.jsondoc</groupId>
+	<artifactId>jsondoc-samples-master</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>jsondoc-samples-master</name>
+	<description>Parent pom for JSONDoc samples</description>
+	<url>http://jsondoc.org</url>
+
+	<modules>
+		<module>jsondoc-sample-spark</module>
+		<module>jsondoc-sample-external</module>
+		<module>jsondoc-sample-springmvc</module>
+	</modules>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<jsondoc.version>1.0.7-SNAPSHOT</jsondoc.version>
+	</properties>
+	
+	<repositories>
+		<repository>
+			<id>SpringSource milestones</id>
+			<url>http://repo.springsource.org/libs-milestone</url>
+		</repository>
+	</repositories>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.0.2</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+		</plugins>
+		
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.jsondoc</groupId>
+					<artifactId>jsondoc-maven-plugin</artifactId>
+					<version>${jsondoc.version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.jsondoc</groupId>
+				<artifactId>jsondoc-core</artifactId>
+				<version>${jsondoc.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.jsondoc</groupId>
+				<artifactId>jsondoc-springmvc</artifactId>
+				<version>${jsondoc.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.jsondoc</groupId>
+				<artifactId>jsondoc-ui</artifactId>
+				<version>${jsondoc.version}</version>
+				<type>zip</type>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.sparkjava</groupId>
+				<artifactId>spark-core</artifactId>
+				<version>1.1.1</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.google.code.gson</groupId>
+				<artifactId>gson</artifactId>
+				<version>2.2.4</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>servlet-api</artifactId>
+				<version>2.4</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>3.1.2.RELEASE</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-core</artifactId>
+				<version>3.1.2.RELEASE</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-web</artifactId>
+				<version>3.1.2.RELEASE</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-config</artifactId>
+				<version>3.1.2.RELEASE</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-mapper-asl</artifactId>
+				<version>1.9.8</version>
+			</dependency>
+
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>1.2.17</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test-mvc</artifactId>
+				<version>1.0.0.M1</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
+				<version>3.1.2.RELEASE</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+</project>
+

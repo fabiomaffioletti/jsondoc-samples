@@ -1,0 +1,241 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<artifactId>jsondoc-samples-master</artifactId>
+		<groupId>org.jsondoc</groupId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+	<artifactId>jsondoc-sample-springmvc</artifactId>
+	<packaging>war</packaging>
+
+	<name>jsondoc-sample-springmvc</name>
+	<description>The sample project of the jsondoc project</description>
+	<url>http://www.jsondoc.org</url>
+
+	<properties>
+		<base.path>http://localhost:8080/api</base.path>
+		<jsondoc.path>http://localhost:8080/api/jsondoc</jsondoc.path>
+		<jsondoc.core.log.level>debug</jsondoc.core.log.level>
+	</properties>
+
+	<profiles>
+		<profile>
+			<id>appfog</id>
+			<properties>
+				<base.path>http://jsondoc.eu01.aws.af.cm/api</base.path>
+				<jsondoc.path>http://jsondoc.eu01.aws.af.cm/api/jsondoc</jsondoc.path>
+				<jsondoc.core.log.level>warn</jsondoc.core.log.level>
+			</properties>
+		</profile>
+	</profiles>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.jsondoc</groupId>
+			<artifactId>jsondoc-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jsondoc</groupId>
+			<artifactId>jsondoc-springmvc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jsondoc</groupId>
+			<artifactId>jsondoc-ui</artifactId>
+			<type>zip</type>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jsondoc</groupId>
+			<artifactId>jsondoc-sample-external</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test-mvc</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<finalName>ROOT</finalName>
+
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<webResources>
+						<webResource>
+							<directory>src/main/webapp</directory>
+							<filtering>true</filtering>
+							<includes>
+								<include>jsondoc.jsp</include>
+							</includes>
+						</webResource>
+					</webResources>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<configuration>
+					<scanIntervalSeconds>3</scanIntervalSeconds>
+					<webApp>
+						<contextPath>/</contextPath>
+					</webApp>
+					<connectors>
+						<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+							<port>8080</port>
+						</connector>
+					</connectors>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.jsondoc</groupId>
+				<artifactId>jsondoc-maven-plugin</artifactId>
+				<configuration>
+					<version>1.1</version>
+					<basePath>http://localhost:8080/api</basePath>
+					<packages>
+						<package>org.jsondoc.sample.controller</package>
+						<package>org.jsondoc.sample.pojo</package>
+						<package>com.sample</package>
+					</packages>
+					<outputFile>/tmp/jsondoc.json</outputFile>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.9</version>
+				<executions>
+					<execution>
+						<id>unpack</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>unpack</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>org.jsondoc</groupId>
+									<artifactId>jsondoc-ui</artifactId>
+									<type>zip</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${project.build.directory}</outputDirectory>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<id>copy-jsondoc-ui</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target name="copy jsondoc ui files">
+								<copy todir="${basedir}/src/main/webapp">
+									<fileset dir="${project.build.directory}/jsondoc-ui"></fileset>
+								</copy>
+							</target>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>copy-war-for-appfog-deploy</id>
+						<phase>package</phase>
+						<configuration>
+							<tasks>
+								<copy todir="../jsondoc-cloud/" flatten="true" overwrite="true"
+									verbose="true" failonerror="true">
+									<fileset dir="target" includes="*.war" />
+								</copy>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+				<filtering>true</filtering>
+			</testResource>
+		</testResources>
+	</build>
+</project>
