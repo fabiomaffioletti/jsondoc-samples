@@ -47,7 +47,6 @@
 		<dependency>
 			<groupId>org.jsondoc</groupId>
 			<artifactId>jsondoc-ui</artifactId>
-			<type>zip</type>
 		</dependency>
 
 		<dependency>
@@ -175,9 +174,9 @@
 								<artifactItem>
 									<groupId>org.jsondoc</groupId>
 									<artifactId>jsondoc-ui</artifactId>
-									<type>zip</type>
+									<type>jar</type>
 									<overWrite>true</overWrite>
-									<outputDirectory>${project.build.directory}</outputDirectory>
+									<outputDirectory>${project.build.directory}/jsondoc-ui</outputDirectory>
 								</artifactItem>
 							</artifactItems>
 						</configuration>
@@ -198,9 +197,16 @@
 						</goals>
 						<configuration>
 							<target name="copy jsondoc ui files">
-								<copy todir="${basedir}/src/main/webapp">
-									<fileset dir="${project.build.directory}/jsondoc-ui"></fileset>
+								<copy todir="${basedir}/src/main/webapp/css">
+									<fileset dir="${project.build.directory}/jsondoc-ui/css"></fileset>
 								</copy>
+								<copy todir="${basedir}/src/main/webapp/js">
+									<fileset dir="${project.build.directory}/jsondoc-ui/js"></fileset>
+								</copy>
+								<copy todir="${basedir}/src/main/webapp/font">
+									<fileset dir="${project.build.directory}/jsondoc-ui/font"></fileset>
+								</copy>
+								<copy todir="${basedir}/src/main/webapp" file="${project.build.directory}/jsondoc-ui/jsondoc.jsp" />
 							</target>
 						</configuration>
 					</execution>

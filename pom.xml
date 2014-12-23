@@ -70,7 +70,6 @@
 				<groupId>org.jsondoc</groupId>
 				<artifactId>jsondoc-ui</artifactId>
 				<version>${jsondoc.version}</version>
-				<type>zip</type>
 			</dependency>
 			
 			<dependency>
