@@ -115,5 +115,12 @@ public class CityController {
 		cities.put(s, new City("Sydney", 54654, 32));
 		return cities;
 	}
+	
+	@ApiMethod(path = "/cities/patch", verb = ApiVerb.PATCH, description = "A test for patch verb", produces = { MediaType.APPLICATION_JSON_VALUE })
+	@RequestMapping(value = "/patch", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE })
+	@ResponseBody
+	public @ApiResponseObject City patch() {
+		return new City("Patch city", 1982, 32);
+	}
 
 }
