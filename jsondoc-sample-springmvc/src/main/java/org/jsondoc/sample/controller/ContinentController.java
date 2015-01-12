@@ -2,9 +2,8 @@ package org.jsondoc.sample.controller;
 
 import org.jsondoc.core.annotation.Api;
 import org.jsondoc.core.annotation.ApiMethod;
-import org.jsondoc.core.annotation.ApiParam;
+import org.jsondoc.core.annotation.ApiPathParam;
 import org.jsondoc.core.annotation.ApiResponseObject;
-import org.jsondoc.core.pojo.ApiParamType;
 import org.jsondoc.core.pojo.ApiVerb;
 import org.jsondoc.sample.pojo.Continent;
 import org.springframework.http.MediaType;
@@ -39,7 +38,7 @@ public class ContinentController {
 
 	@ApiMethod(path = "/continents/{continent}", verb = ApiVerb.GET, description = "Gets a continent by name.", produces = { MediaType.APPLICATION_JSON_VALUE })
 	@RequestMapping(value = "/{continent}", method = RequestMethod.GET)
-	public @ResponseBody @ApiResponseObject Continent getContinentByName(@ApiParam(name = "continent", paramType = ApiParamType.PATH) @PathVariable("continent") Continent continent) {
+	public @ResponseBody @ApiResponseObject Continent getContinentByName(@ApiPathParam(name = "continent") @PathVariable("continent") Continent continent) {
 		return Continent.valueOf(continent.name());
 	}
 

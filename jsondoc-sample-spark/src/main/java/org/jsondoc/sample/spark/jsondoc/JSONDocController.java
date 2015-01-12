@@ -4,7 +4,8 @@ import static spark.Spark.get;
 
 import java.util.List;
 
-import org.jsondoc.core.util.JSONDocUtils;
+import org.jsondoc.core.util.DefaultJSONDocScanner;
+import org.jsondoc.core.util.JSONDocScanner;
 
 import spark.Request;
 import spark.Response;
@@ -18,7 +19,8 @@ public class JSONDocController {
 		get(new Route("/jsondoc") {
 			@Override
 			public Object handle(Request request, Response response) {
-				return gson.toJson(JSONDocUtils.getApiDoc(version, basePath, packages));
+				JSONDocScanner jsondocScanner = new DefaultJSONDocScanner();
+				return gson.toJson(jsondocScanner.getJSONDoc(version, basePath, packages));
 			}
 		});
 	}

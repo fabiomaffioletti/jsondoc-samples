@@ -10,7 +10,9 @@ import org.jsondoc.core.annotation.ApiMethod;
 import org.jsondoc.core.annotation.ApiResponseObject;
 import org.jsondoc.core.pojo.ApiVerb;
 import org.jsondoc.sample.pojo.User;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -78,6 +80,13 @@ public class TypeController {
 	public @ResponseBody @ApiResponseObject
 	Map<List<String>, Integer> mapListOfStringInteger() {
 		return Maps.newHashMap();
+	}
+	
+	@ApiMethod(path = "/type/responseentity", verb = ApiVerb.GET, description = "Gets a response entity", produces = { MediaType.APPLICATION_JSON_VALUE })
+	@RequestMapping(value = "/responseentity", method = RequestMethod.GET)
+	public @ResponseBody @ApiResponseObject
+	ResponseEntity<String> responseEntity() {
+		return new ResponseEntity<String>("Response entity", HttpStatus.OK);
 	}
 
 }

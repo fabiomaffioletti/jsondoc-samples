@@ -14,15 +14,15 @@
 	<context:component-scan base-package="org.jsondoc.sample" />
 	
 	<bean id="documentationController" class="org.jsondoc.springmvc.controller.JSONDocController">
-		<property name="version" value="1.0" />
-		<property name="basePath" value="${base.path}" />
-		<property name="packages">
+		<constructor-arg name="version" value="1.0" />
+		<constructor-arg name="basePath" value="${base.path}" />
+		<constructor-arg name="packages">
 			<list>
 				<value>org.jsondoc.sample.controller</value>
 				<value>org.jsondoc.sample.pojo</value>
 				<value>com.sample.external.pojo</value>
 			</list>
-		</property>
+		</constructor-arg>
 	</bean>
 	
 	<bean id="viewResolver"

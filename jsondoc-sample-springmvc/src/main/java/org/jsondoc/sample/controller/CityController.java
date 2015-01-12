@@ -12,10 +12,9 @@ import org.jsondoc.core.annotation.ApiErrors;
 import org.jsondoc.core.annotation.ApiHeader;
 import org.jsondoc.core.annotation.ApiHeaders;
 import org.jsondoc.core.annotation.ApiMethod;
-import org.jsondoc.core.annotation.ApiParam;
+import org.jsondoc.core.annotation.ApiPathParam;
 import org.jsondoc.core.annotation.ApiResponseObject;
 import org.jsondoc.core.annotation.ApiVersion;
-import org.jsondoc.core.pojo.ApiParamType;
 import org.jsondoc.core.pojo.ApiVerb;
 import org.jsondoc.sample.pojo.City;
 import org.springframework.http.HttpStatus;
@@ -40,7 +39,7 @@ public class CityController {
 	@RequestMapping(value = "/name/{name}", method = RequestMethod.GET)
 	public @ResponseBody
 	@ApiResponseObject
-	City get(@PathVariable @ApiParam(name = "name", description = "The city name", allowedvalues = { "Melbourne", "Sydney", "Perth" }, paramType=ApiParamType.PATH) String name) {
+	City get(@PathVariable @ApiPathParam(name = "name", description = "The city name", allowedvalues = { "Melbourne", "Sydney", "Perth" }) String name) {
 		return new City(name, 1982700, 52);
 	}
 
@@ -49,6 +48,7 @@ public class CityController {
 	@ApiHeaders(headers = { @ApiHeader(name = "api_id", description = "The api identifier") })
 	@ApiErrors(apierrors = { @ApiError(code = "3000", description = "City already existing"), @ApiError(code = "9000", description = "Illegal argument") })
 	@RequestMapping(method = RequestMethod.POST)
+	@ResponseStatus(value = HttpStatus.CREATED)
 	public @ResponseBody
 	@ApiResponseObject
 	City post(@RequestBody @ApiBodyObject City city) {
@@ -59,7 +59,7 @@ public class CityController {
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public @ResponseBody
-	void delete(@PathVariable @ApiParam(name = "id", description = "The city ID", paramType=ApiParamType.PATH) Integer id) {
+	void delete(@PathVariable @ApiPathParam(name = "id", description = "The city ID") Integer id) {
 
 	}
 	
@@ -67,7 +67,7 @@ public class CityController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public @ResponseBody
 	@ApiResponseObject
-	City getById(@PathVariable @ApiParam(name = "id", description = "The city ID", paramType=ApiParamType.PATH) Integer id) {
+	City getById(@PathVariable @ApiPathParam(name = "id", description = "The city ID") Integer id) {
 		return new City("cityById", 1982700, 52);
 	}
 
@@ -75,7 +75,7 @@ public class CityController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public @ResponseBody
 	@ApiResponseObject
-	City put(@PathVariable @ApiParam(name = "id", description = "The city ID", paramType=ApiParamType.PATH) Integer id, @RequestBody @ApiBodyObject City city) {
+	City put(@PathVariable @ApiPathParam(name = "id", description = "The city ID") Integer id, @RequestBody @ApiBodyObject City city) {
 		return city;
 	}
 
@@ -116,11 +116,32 @@ public class CityController {
 		return cities;
 	}
 	
-	@ApiMethod(path = "/cities/patch", verb = ApiVerb.PATCH, description = "A test for patch verb", produces = { MediaType.APPLICATION_JSON_VALUE })
-	@RequestMapping(value = "/patch", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE })
-	@ResponseBody
-	public @ApiResponseObject City patch() {
-		return new City("Patch city", 1982, 32);
-	}
+//	@ApiMethod(path = "/cities/patch", verb = ApiVerb.PATCH, description = "A test for patch verb", produces = { MediaType.APPLICATION_JSON_VALUE })
+//	@RequestMapping(value = "/patch", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE })
+//	@ResponseBody
+//	public @ApiResponseObject City patch() {
+//		return new City("Patch", 1982, 32);
+//	}
+//	
+//	@ApiMethod(description = "A test for head verb")
+//	@RequestMapping(value = "/head", method = RequestMethod.HEAD, produces = { MediaType.APPLICATION_JSON_VALUE })
+//	@ResponseBody
+//	public @ApiResponseObject City head() {
+//		return new City("Head", 1982, 32);
+//	}
+//	
+//	@ApiMethod(description = "A test for options verb")
+//	@RequestMapping(value = "/options", method = RequestMethod.OPTIONS, produces = { MediaType.APPLICATION_JSON_VALUE })
+//	@ResponseBody
+//	public @ApiResponseObject City options() {
+//		return new City("Options", 1982, 32);
+//	}
+//
+//	@ApiMethod(description = "A test for trace verb")
+//	@RequestMapping(value = "/trace", method = RequestMethod.TRACE, produces = { MediaType.APPLICATION_JSON_VALUE })
+//	@ResponseBody
+//	public @ApiResponseObject City trace() {
+//		return new City("Trace", 1982, 32);
+//	}
 
 }

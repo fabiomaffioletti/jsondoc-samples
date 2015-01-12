@@ -10,10 +10,9 @@ import org.jsondoc.core.annotation.ApiErrors;
 import org.jsondoc.core.annotation.ApiHeader;
 import org.jsondoc.core.annotation.ApiHeaders;
 import org.jsondoc.core.annotation.ApiMethod;
-import org.jsondoc.core.annotation.ApiParam;
+import org.jsondoc.core.annotation.ApiPathParam;
 import org.jsondoc.core.annotation.ApiResponseObject;
 import org.jsondoc.core.annotation.ApiVersion;
-import org.jsondoc.core.pojo.ApiParamType;
 import org.jsondoc.core.pojo.ApiVerb;
 import org.jsondoc.sample.data.SampleData;
 import org.jsondoc.sample.pojo.City;
@@ -45,8 +44,8 @@ public class CountryController {
 		@ApiError(code="1000", description="Country not found"),
 		@ApiError(code="9000", description="Illegal argument")
 	})
-	@RequestMapping(value="/{name}", method=RequestMethod.GET)
-	public @ResponseBody @ApiResponseObject Country getCountryByName(@PathVariable @ApiParam(name="name", paramType=ApiParamType.PATH) String name) {
+	@RequestMapping(value = "/{name}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	public @ResponseBody Country getCountryByName(@PathVariable @ApiPathParam(name="name") String name) {
 		List<City> cities = new ArrayList<City>();
 		cities.add(new City("Sydney", 19329, 43));
 		cities.add(new City("Melbourne", 85743, 12));
@@ -81,7 +80,7 @@ public class CountryController {
 		@ApiError(code="7000", description="Invalid application id"),
 		@ApiError(code="9000", description="Illegal argument")
 	})
-	@RequestMapping(method=RequestMethod.POST)
+	@RequestMapping(headers = "application_id", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public @ResponseBody @ApiResponseObject Country saveCountry(@RequestBody @ApiBodyObject Country country) {
 		return country;
 	}
@@ -101,8 +100,9 @@ public class CountryController {
 		@ApiError(code="9000", description="Illegal argument")
 	})
 	@ResponseStatus(value=HttpStatus.NO_CONTENT)
-	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	public @ResponseBody void deleteCountry(@PathVariable @ApiParam(name="id", paramType=ApiParamType.PATH) Integer id) {
+	@RequestMapping(headers = "application_id", value = "/{id}", method = RequestMethod.DELETE, produces = { MediaType.APPLICATION_JSON_VALUE })
+	public @ResponseBody void deleteCountry(@PathVariable @ApiPathParam(name="id") Integer id) {
 		
 	}
+
 }
