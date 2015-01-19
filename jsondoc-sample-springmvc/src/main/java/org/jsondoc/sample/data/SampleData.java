@@ -8,6 +8,8 @@ import org.jsondoc.sample.pojo.Continent;
 import org.jsondoc.sample.pojo.Country;
 
 import com.google.common.collect.Lists;
+import com.sample.external.pojo.Author;
+import com.sample.external.pojo.Book;
 
 public class SampleData {
 
@@ -25,5 +27,13 @@ public class SampleData {
 	public static Country us = new Country(population.nextInt(), squareKm.nextInt(), "U.S.A.", Lists.newArrayList(newyork, boston, sanfrancisco), Continent.AMERICA);
 	
 	public static List<Country> countries = Lists.newArrayList(australia, us);
+	
+	public static Author hornby = new Author(1, "Nick", "Hornby");
+	public static Author smith = new Author(2, "Wilbur", "Smith");
+	public static Book highFidelty = new Book(1, "High fidelty", hornby);
+	public static Book aLongwayDown = new Book(2, "A long way down", hornby);
+	public static Book desertGod = new Book(3, "Desert god", smith);
+	
+	public static List<Book> books = Lists.newArrayList(highFidelty, aLongwayDown, desertGod);
 
 }

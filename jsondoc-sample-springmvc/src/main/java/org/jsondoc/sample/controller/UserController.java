@@ -13,6 +13,7 @@ import org.jsondoc.core.annotation.ApiPathParam;
 import org.jsondoc.core.annotation.ApiQueryParam;
 import org.jsondoc.core.annotation.ApiResponseObject;
 import org.jsondoc.core.pojo.ApiVerb;
+import org.jsondoc.sample.flow.FlowConstants;
 import org.jsondoc.sample.pojo.User;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -86,6 +87,13 @@ public class UserController {
 		List<User> users = new ArrayList<User>();
 		users.add(new User(1, "jsondoc-user-1", 1, "M"));
 		return users;
+	}
+	
+	@ApiMethod(id = FlowConstants.USER_LOGIN_METHOD_ID, path = "/users/login/{username}/{password}", verb = ApiVerb.GET, description = "Login a user", produces = { MediaType.APPLICATION_JSON_VALUE})
+	@RequestMapping(value = "/login/{username}/{password}", method = RequestMethod.GET)
+	public @ResponseBody @ApiResponseObject
+	User login(@PathVariable @ApiPathParam(name = "username", description = "The user's username", required = true) String username, @PathVariable @ApiPathParam(name = "password", description = "The user's password", required = true) String password) {
+		return new User(1, username, 30, "M");
 	}
 
 }

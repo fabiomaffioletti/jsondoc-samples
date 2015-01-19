@@ -21,6 +21,7 @@
 				<value>org.jsondoc.sample.controller</value>
 				<value>org.jsondoc.sample.pojo</value>
 				<value>com.sample.external.pojo</value>
+				<value>org.jsondoc.sample.flow</value>
 			</list>
 		</constructor-arg>
 	</bean>
