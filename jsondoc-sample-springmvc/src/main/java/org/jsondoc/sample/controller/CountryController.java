@@ -44,7 +44,7 @@ public class CountryController {
 		@ApiError(code="1000", description="Country not found"),
 		@ApiError(code="9000", description="Illegal argument")
 	})
-	@RequestMapping(value = "/{name}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	@RequestMapping(headers = "country-header=abc", value = "/{name}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public @ResponseBody Country getCountryByName(@PathVariable @ApiPathParam(name="name") String name) {
 		List<City> cities = new ArrayList<City>();
 		cities.add(new City("Sydney", 19329, 43));

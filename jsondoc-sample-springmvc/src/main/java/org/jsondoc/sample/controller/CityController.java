@@ -45,7 +45,7 @@ public class CityController {
 
 	@ApiMethod(path = "/cities", verb = ApiVerb.POST, description = "Saves a city", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	@ApiVersion(since = "1.2-SNAPSHOT")
-	@ApiHeaders(headers = { @ApiHeader(name = "api_id", description = "The api identifier") })
+	@ApiHeaders(headers = { @ApiHeader(name = "api_id", description = "The api identifier", allowedvalues = {"abc", "cde"}) })
 	@ApiErrors(apierrors = { @ApiError(code = "3000", description = "City already existing"), @ApiError(code = "9000", description = "Illegal argument") })
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.CREATED)

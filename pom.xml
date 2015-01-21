@@ -15,13 +15,15 @@
 		<module>jsondoc-sample-spark</module>
 		<module>jsondoc-sample-external</module>
 		<module>jsondoc-sample-springmvc</module>
+		<module>jsondoc-sample-boot</module>
 	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jsondoc.version>1.1.2</jsondoc.version>
+		<jsondoc.version>1.1.3</jsondoc.version>
+		<spring.boot.version>1.2.0.RELEASE</spring.boot.version>
 	</properties>
-	
+
 	<repositories>
 		<repository>
 			<id>SpringSource milestones</id>
@@ -40,7 +42,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		
+
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -59,60 +61,48 @@
 				<artifactId>jsondoc-core</artifactId>
 				<version>${jsondoc.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>org.jsondoc</groupId>
 				<artifactId>jsondoc-springmvc</artifactId>
 				<version>${jsondoc.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>org.jsondoc</groupId>
 				<artifactId>jsondoc-ui</artifactId>
 				<version>${jsondoc.version}</version>
 			</dependency>
-			
+
+			<dependency>
+				<groupId>org.jsondoc</groupId>
+				<artifactId>jsondoc-ui-webjar</artifactId>
+				<version>${jsondoc.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.jsondoc</groupId>
+				<artifactId>spring-boot-starter-jsondoc</artifactId>
+				<version>${jsondoc.version}</version>
+			</dependency>
+
 			<dependency>
 				<groupId>com.sparkjava</groupId>
 				<artifactId>spark-core</artifactId>
 				<version>1.1.1</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>com.google.code.gson</groupId>
 				<artifactId>gson</artifactId>
 				<version>2.2.4</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>servlet-api</artifactId>
 				<version>2.4</version>
 				<scope>provided</scope>
-			</dependency>
-
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-webmvc</artifactId>
-				<version>3.1.2.RELEASE</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.springframework.security</groupId>
-				<artifactId>spring-security-core</artifactId>
-				<version>3.1.2.RELEASE</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.springframework.security</groupId>
-				<artifactId>spring-security-web</artifactId>
-				<version>3.1.2.RELEASE</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.springframework.security</groupId>
-				<artifactId>spring-security-config</artifactId>
-				<version>3.1.2.RELEASE</version>
 			</dependency>
 
 			<dependency>
@@ -126,7 +116,7 @@
 				<artifactId>log4j</artifactId>
 				<version>1.2.17</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-test-mvc</artifactId>
