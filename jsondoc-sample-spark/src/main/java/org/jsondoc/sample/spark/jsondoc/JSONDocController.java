@@ -4,8 +4,8 @@ import static spark.Spark.get;
 
 import java.util.List;
 
-import org.jsondoc.core.util.DefaultJSONDocScanner;
-import org.jsondoc.core.util.JSONDocScanner;
+import org.jsondoc.core.scanner.DefaultJSONDocScanner;
+import org.jsondoc.core.scanner.JSONDocScanner;
 
 import spark.Request;
 import spark.Response;

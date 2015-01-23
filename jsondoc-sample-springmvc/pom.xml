@@ -159,6 +159,8 @@
 						<package>com.sample</package>
 					</packages>
 					<outputFile>/tmp/jsondoc.json</outputFile>
+<!-- 					<scanner>org.jsondoc.core.scanner.DefaultJSONDocScanner</scanner> -->
+					<scanner>org.jsondoc.springmvc.scanner.SpringJSONDocScanner</scanner>
 				</configuration>
 			</plugin>
 
