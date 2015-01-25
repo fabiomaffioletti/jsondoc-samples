@@ -33,7 +33,7 @@ public class UserController {
 	@ApiErrors(apierrors = { @ApiError(code = "3000", description = "User not found"), @ApiError(code = "9000", description = "Illegal argument") })
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public @ResponseBody @ApiResponseObject
-	User user(@PathVariable @ApiPathParam(name = "id", description = "The user's ID", required = true) Integer id) {
+	User user(@PathVariable @ApiPathParam(name = "id", description = "The user's ID") Integer id) {
 		return new User(id, "jsondoc-user", 30, "M");
 	}
 
@@ -41,7 +41,7 @@ public class UserController {
 	@ApiErrors(apierrors = { @ApiError(code = "3000", description = "User not found"), @ApiError(code = "9000", description = "Illegal argument") })
 	@RequestMapping(value = "/{gender}/{age}", method = RequestMethod.GET)
 	public @ResponseBody @ApiResponseObject
-	List<User> userAge(@PathVariable @ApiPathParam(name = "gender", description = "The user's gender", required = true) String gender, @PathVariable @ApiPathParam(name = "age", description = "The user's required age", required = true) Integer age) {
+	List<User> userAge(@PathVariable @ApiPathParam(name = "gender", description = "The user's gender") String gender, @PathVariable @ApiPathParam(name = "age", description = "The user's required age") Integer age) {
 		List<User> users = new ArrayList<User>();
 		users.add(new User(1, "jsondoc-user-1", age, gender));
 		users.add(new User(2, "jsondoc-user-2", age, gender));
@@ -61,8 +61,8 @@ public class UserController {
 	@RequestMapping(value = "/q/{name}/{gender}", method = RequestMethod.GET)
 	public @ResponseBody @ApiResponseObject
 	List<User> usersByNameAndGenderAndAge(
-			@PathVariable("name") @ApiPathParam(name = "name", description = "The user's name", required = true) String name, 
-			@PathVariable("gender") @ApiPathParam(name = "gender", description = "The user's gender", required = true) String gender, 
+			@PathVariable("name") @ApiPathParam(name = "name", description = "The user's name") String name, 
+			@PathVariable("gender") @ApiPathParam(name = "gender", description = "The user's gender") String gender, 
 			@RequestParam(value="agemin") @ApiQueryParam(name = "agemin", description = "The user's min age", required = false) Integer agemin, 
 			@RequestParam(value="agemax") @ApiQueryParam(name = "agemax", description = "The user's max age", required = false) Integer agemax) {
 		List<User> users = new ArrayList<User>();
@@ -92,7 +92,7 @@ public class UserController {
 	@ApiMethod(id = FlowConstants.USER_LOGIN_METHOD_ID, path = "/users/login/{username}/{password}", verb = ApiVerb.GET, description = "Login a user", produces = { MediaType.APPLICATION_JSON_VALUE})
 	@RequestMapping(value = "/login/{username}/{password}", method = RequestMethod.GET)
 	public @ResponseBody @ApiResponseObject
-	User login(@PathVariable @ApiPathParam(name = "username", description = "The user's username", required = true) String username, @PathVariable @ApiPathParam(name = "password", description = "The user's password", required = true) String password) {
+	User login(@PathVariable @ApiPathParam(name = "username", description = "The user's username") String username, @PathVariable @ApiPathParam(name = "password", description = "The user's password") String password) {
 		return new User(1, username, 30, "M");
 	}
 
