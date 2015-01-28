@@ -24,7 +24,7 @@
 	
 	<profiles>
 		<profile>
-			<id>offline</id>
+			<id>distributable</id>
 			<properties>
 				<base.path>http://localhost:8080/api</base.path>
 				<jsondoc.path>jsondoc.json</jsondoc.path>
@@ -206,6 +206,27 @@
 					</execution>
 				</executions>
 			</plugin>
+			
+			<plugin>
+	            <groupId>com.google.code.maven-replacer-plugin</groupId>
+	            <artifactId>replacer</artifactId>
+	            <version>1.5.3</version>
+	            <executions>                
+	                <execution>
+	                    <phase>package</phase>
+	                    <goals>
+	                        <goal>replace</goal>
+	                    </goals>
+	                </execution>
+	            </executions>
+	            <configuration>
+	                <includes>
+	                    <include>${project.build.directory}/jsondoc-ui/jsondoc-ui.html</include>
+	                </includes>
+	                <token>'_JSONDOC_OFFLINE_PLACEHOLDER_'</token> <!-- Do not change this value -->
+	                <valueFile>${project.build.directory}/jsondoc-ui/jsondoc.json</valueFile>
+	            </configuration>
+	        </plugin>
 			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
