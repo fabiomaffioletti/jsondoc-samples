@@ -8,9 +8,9 @@ public class Hint {
 
 	@ApiObjectField
 	private Integer id;
-	@ApiObjectField
+	@ApiObjectField(name = "my_custom_username")
 	private String username;
-	@ApiObjectField(description = "The age of this object", required = true)
+	@ApiObjectField(name = "my_age", description = "The age of this object", required = true)
 	private Integer age;
 	@ApiObjectField(description = "The gender of this object", required = false)
 	private String gender;

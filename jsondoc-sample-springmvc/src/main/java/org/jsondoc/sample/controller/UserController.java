@@ -48,15 +48,15 @@ public class UserController {
 		return users;
 	}
 	
-	@ApiMethod(path = "/users?name={name}", verb = ApiVerb.GET, description = "Gets a user with the given name", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	@ApiMethod(path = "/users", verb = ApiVerb.GET, description = "Gets a user with the given name", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	@ApiErrors(apierrors = { @ApiError(code = "3000", description = "User not found"), @ApiError(code = "9000", description = "Illegal argument") })
 	@RequestMapping(method = RequestMethod.GET)
 	public @ResponseBody @ApiResponseObject
-	User userByName(@RequestParam("name") @ApiQueryParam(name = "name", description = "The user's name", required = true) String name) {
+	User userByName(@RequestParam(value = "name", required = true) @ApiQueryParam(name = "name", description = "The user's name", required = true) String name) {
 		return new User(1, name, 30, "M");
 	}
 	
-	@ApiMethod(path = "/users/q/{name}/{gender}?agemin={agemin}&agemax={agemax}", verb = ApiVerb.GET, description = "Gets a user with the given gender and given age", produces = { MediaType.APPLICATION_JSON_VALUE })
+	@ApiMethod(path = "/users/q/{name}/{gender}", verb = ApiVerb.GET, description = "Gets a user with the given gender and given age", produces = { MediaType.APPLICATION_JSON_VALUE })
 	@ApiErrors(apierrors = { @ApiError(code = "3000", description = "User not found"), @ApiError(code = "9000", description = "Illegal argument") })
 	@RequestMapping(value = "/q/{name}/{gender}", method = RequestMethod.GET)
 	public @ResponseBody @ApiResponseObject
