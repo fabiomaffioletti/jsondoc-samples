@@ -31,7 +31,7 @@ public class BookController {
 	@Autowired
 	private BookRepository bookRepository;
 	
-	@ApiMethod(id = ShelfFlowConstants.BOOK_FIND_ONE)
+	@ApiMethod(id = ShelfFlowConstants.BOOK_FIND_ONE, summary = "Gets a book given the book ID")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public @ApiResponseObject Book findOne(@ApiPathParam(name = "id") @PathVariable Long id) {
 		return bookRepository.findOne(id);

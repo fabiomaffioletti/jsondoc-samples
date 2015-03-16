@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @RequestMapping(value = "/cities")
 public class CityController {
 
-	@ApiMethod(path = "/cities/name/{name}", verb = ApiVerb.GET, description = "Gets a city with the given name. (Allowed values are just to demonstrate the annotation attribute)", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	@ApiMethod(path = "/cities/name/{name}", verb = ApiVerb.GET, description = "Gets a city with the given name.<br>(Allowed values are just to demonstrate the annotation attribute)", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	@ApiVersion(since = "1.0", until = "2.12")
 	@ApiErrors(apierrors = { @ApiError(code = "2000", description = "City not found"), @ApiError(code = "9000", description = "Illegal argument") })
 	@RequestMapping(value = "/name/{name}", method = RequestMethod.GET)

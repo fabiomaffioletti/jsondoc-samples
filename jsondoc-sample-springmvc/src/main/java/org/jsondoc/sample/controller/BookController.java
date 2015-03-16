@@ -24,7 +24,7 @@ import com.sample.external.pojo.Book;
 @RequestMapping(value = "/books")
 public class BookController {
 
-	@ApiMethod(id = FlowConstants.BOOK_LIST_METHOD_ID)
+	@ApiMethod(id = FlowConstants.BOOK_LIST_METHOD_ID, summary = "Gets a list of books")
 	@RequestMapping(method = RequestMethod.GET)
 	public @ResponseBody @ApiResponseObject
 	List<Book> books() {

@@ -37,6 +37,8 @@
 				<value>org.jsondoc.sample.flow</value>
 			</list>
 		</constructor-arg>
+		<property name="playgroundEnabled" value="true" />
+		<property name="displayMethodAs" value="URI" />
 	</bean>
 
 	<bean id="viewResolver"
