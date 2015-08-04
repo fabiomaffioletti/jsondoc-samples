@@ -22,16 +22,16 @@ public class Book {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@ApiObjectField(description = "The book's ID")
+	@ApiObjectField(description = "The book's ID", order = 4)
 	private Long id;
 
 	@Column(name = "title")
-	@ApiObjectField(description = "The book's title")
+	@ApiObjectField(description = "The book's title", order = 2)
 	private String title;
 
 	@ManyToOne
 	@JoinColumn(name = "author_id")
-	@ApiObjectField(description = "The book's author")
+	@ApiObjectField(description = "The book's author", order = 1)
 	private Author author;
 
 }

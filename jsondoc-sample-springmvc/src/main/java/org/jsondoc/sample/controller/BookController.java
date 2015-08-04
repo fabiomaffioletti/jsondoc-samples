@@ -45,7 +45,7 @@ public class BookController {
 	}
 	
 	@ApiMethod(id = FlowConstants.BOOK_PURCHASE_METHOD_ID)
-	@RequestMapping(value = "/purchase/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/purchase/{id}", method = { RequestMethod.POST, RequestMethod.PUT })
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public void purchase(@ApiPathParam @PathVariable("id") Integer id) {
 		
