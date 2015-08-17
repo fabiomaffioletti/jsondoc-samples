@@ -12,6 +12,7 @@
 <script type="text/javascript" src="js/handlebars-1.0.0.beta.6.js"></script>
 <script type="text/javascript" src="js/jlinq.js"></script>
 <script type="text/javascript" src="js/prettify.js"></script>
+<script type="text/javascript" src="js/jsondoc.js"></script>
 
 <link rel="stylesheet" href="css/bootstrap.min.css" >
 <link rel="stylesheet" href="css/jsondoc.css" >
@@ -184,7 +185,9 @@
 				{{#each verb}}
 					<span class="label pull-right verb {{this}}">{{this}}</span>
 				{{/each}}
-				<a id="{{jsondocId}}" href="#_{{jsondocId}}" rel="method" data-toggle="collapse" data-parent="#accordion" aria-controls="_{{jsondocId}}" aria-expanded="true">{{displayedMethodString}}</a>
+				{{#each path}}
+					<a id="{{../jsondocId}}" href="#_{{../jsondocId}}" rel="method" data-toggle="collapse" data-parent="#accordion" aria-controls="_{{../jsondocId}}" aria-expanded="true">{{this}}</a><br/>	
+				{{/each}}
 			</h4>
 		</div>
 		<div id="_{{jsondocId}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{jsondocId}}">
@@ -200,7 +203,11 @@
 				<table class="table table-condensed table-bordered" style="table-layout: fixed;">
 					<tr>
 						<th style="width:18%;">Path</th>
-						<td><code>{{path}}</code></td>
+						<td>
+						{{#each path}}
+						<code>{{this}}</code><br/>
+						{{/each}}
+						</td>
 					</tr>
 					{{#if supportedversions}}
 						<tr>
@@ -213,6 +220,26 @@
 								<td>{{supportedversions.until}}</td>
 							</tr>
 						{{/if}}	
+					{{/if}}
+
+					{{#if visibility}}
+						{{#equal visibility "UNDEFINED"}}
+						{{else}}
+						<tr>
+							<th>Visibility</th>
+							<td>{{visibility}}</td>
+						</tr>
+						{{/equal}}
+					{{/if}}
+
+					{{#if stage}}
+						{{#equal stage "UNDEFINED"}}
+						{{else}}
+						<tr>
+							<th>Stage</th>
+							<td>{{stage}}</td>
+						</tr>
+						{{/equal}}
 					{{/if}}
 					
 					{{#if description}}
@@ -411,12 +438,25 @@
 <script id="test" type="text/x-handlebars-template">
 <blockquote>
   <p style="text-transform: uppercase;">Playground</span></p>
-  <small>{{path}}</small>
+  <small>{{#each path}}{{this}}<br/>{{/each}}</small>
 </blockquote>
 
 <div class="row">
+	{{#if path}}
+		<div class="col-md-12" {{#compare path.length 1 operator="=="}} style="display:none;" {{/compare}}>
+			<h4>Request path</h4>
+			<div class="form-group">
+				<select class="form-control" id="requestPath">
+					{{#each path}}
+						<option value="{{this}}">{{this}}</option>
+					{{/each}}
+				</select>
+			</div>
+		</div>
+	{{/if}}
+
 	{{#if verb}}
-		<div class="col-md-12">
+		<div class="col-md-12" {{#compare verb.length 1 operator="=="}} style="display:none;" {{/compare}}>
 			<h4>Request method</h4>
 			<div class="form-group">
 				<select class="form-control" id="requestMethod">
@@ -611,6 +651,24 @@
 			</tr>
 		{{/if}}	
 	{{/if}}
+	{{#if visibility}}
+		{{#equal visibility "UNDEFINED"}}
+		{{else}}
+		<tr>
+			<th>Visibility</th>
+			<td>{{visibility}}</td>
+		</tr>
+		{{/equal}}
+	{{/if}}
+	{{#if stage}}
+		{{#equal stage "UNDEFINED"}}
+		{{else}}
+		<tr>
+			<th>Stage</th>
+			<td>{{stage}}</td>
+		</tr>
+		{{/equal}}
+	{{/if}}
 	{{#if allowedvalues}}
 		<tr><td></td><td>Allowed values: {{allowedvalues}}</td></tr>
 	{{/if}}
@@ -664,6 +722,11 @@
 			$("#jsondocfetch").hide();
 			$("#getDocButton").hide();
 			buildFromJSONDoc($.parseJSON(jsondoc));
+		}
+		
+		if($.urlParam('url') != null) {
+			$("#jsondocfetch").val($.urlParam('url'));
+			checkURLExistence();
 		}
 	});
 	
@@ -834,6 +897,7 @@
 					
 					$("#testButton").click(function() {
 						var requestMethod = $("#requestMethod").val();
+						var requestPath = $("#requestPath").val();
 
 						var headers = new Object();
 						$("#headers input").each(function() {
@@ -848,7 +912,7 @@
 							}
 						}
 						
-						var replacedPath = method.path;
+						var replacedPath = requestPath;
 						var tempReplacedPath = replacedPath; // this is to handle more than one parameter on the url
 						
 						var validationErrors = [];

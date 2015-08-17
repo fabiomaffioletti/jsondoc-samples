@@ -6,6 +6,8 @@ import org.jsondoc.core.annotation.Api;
 import org.jsondoc.core.annotation.ApiMethod;
 import org.jsondoc.core.annotation.ApiPathParam;
 import org.jsondoc.core.annotation.ApiResponseObject;
+import org.jsondoc.core.pojo.ApiStage;
+import org.jsondoc.core.pojo.ApiVisibility;
 import org.jsondoc.sample.data.SampleData;
 import org.jsondoc.sample.flow.FlowConstants;
 import org.springframework.http.HttpStatus;
@@ -19,12 +21,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import com.sample.external.pojo.Author;
 import com.sample.external.pojo.Book;
 
-@Api(name = "book services", description = "Books services")
+@Api(name = "book services", description = "Books services", visibility = ApiVisibility.PRIVATE, stage = ApiStage.BETA)
 @Controller
 @RequestMapping(value = "/books")
 public class BookController {
 
-	@ApiMethod(id = FlowConstants.BOOK_LIST_METHOD_ID, summary = "Gets a list of books")
+	@ApiMethod(id = FlowConstants.BOOK_LIST_METHOD_ID, summary = "Gets a list of books", visibility = ApiVisibility.PUBLIC, stage = ApiStage.RC)
 	@RequestMapping(method = RequestMethod.GET)
 	public @ResponseBody @ApiResponseObject
 	List<Book> books() {
