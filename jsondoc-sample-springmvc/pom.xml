@@ -140,6 +140,7 @@
 							<filtering>true</filtering>
 							<includes>
 								<include>jsondoc-ui.html</include>
+								<include>global-verbs.html</include>
 							</includes>
 						</webResource>
 					</webResources>
@@ -178,6 +179,8 @@
 							<packages>
 								<package>org.jsondoc.sample.controller</package>
 								<package>org.jsondoc.sample.pojo</package>
+								<package>org.jsondoc.sample.flow</package>
+								<package>org.jsondoc.sample.global</package>
 								<package>com.sample</package>
 							</packages>
 							<outputFile>${project.build.directory}/jsondoc-ui/jsondoc.json</outputFile>

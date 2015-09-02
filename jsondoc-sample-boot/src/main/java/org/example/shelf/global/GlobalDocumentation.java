@@ -7,19 +7,19 @@ import org.jsondoc.core.annotation.global.ApiGlobalSection;
 	sections = { 
 		@ApiGlobalSection(
 			title = "HTTP Verbs", 
-			paragraphs = { "HTTP Verbs paragraph 1", "HTTP Verbs paragraph 2", "/jsondocfile./src/main/resources/jsondoc/global-verbs.html", "HTTP Verbs paragraph 3" }
+			paragraphs = { "HTTP Verbs paragraph 1", "HTTP Verbs paragraph 2", "/jsondocfile:/jsondoc/global-verbs.html", "HTTP Verbs paragraph 3" }
 		),
 		@ApiGlobalSection(
 			title = "Authentication",
-			paragraphs = { "/jsondocfile./src/main/resources/jsondoc/global-authentication.html" }
+			paragraphs = { "/jsondocfile:/jsondoc/global-authentication.html" }
 		),
 		@ApiGlobalSection(
 			title = "Headers",
-			paragraphs = { "/jsondocfile./src/main/resources/jsondoc/global-headers.html" }
+			paragraphs = { "/jsondocfile:/jsondoc/global-headers.html" }
 		),
 		@ApiGlobalSection(
 			title = "Status codes",
-			paragraphs = { "/jsondocfile./src/main/resources/jsondoc/global-responsestatuscodes.html" }
+			paragraphs = { "/jsondocfile:/jsondoc/global-responsestatuscodes.html" }
 		)
 	}
 )
