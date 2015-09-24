@@ -12,9 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import org.jsondoc.core.annotation.ApiObject;
-import org.jsondoc.core.annotation.ApiObjectField;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -27,21 +24,17 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @NoArgsConstructor
 @ToString(exclude = "books")
 @EqualsAndHashCode(of = "name")
-@ApiObject
 public class Author {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@ApiObjectField
 	private Long id;
 
 	@Column(name = "name")
-	@ApiObjectField
 	private String name;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "author", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@ApiObjectField
 	private List<Book> books = new ArrayList<Book>();
 	
 }

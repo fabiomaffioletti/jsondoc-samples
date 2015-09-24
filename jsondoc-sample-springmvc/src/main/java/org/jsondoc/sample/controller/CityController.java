@@ -47,7 +47,7 @@ public class CityController {
 	@ApiVersion(since = "1.2-SNAPSHOT")
 	@ApiHeaders(headers = { @ApiHeader(name = "api_id", description = "The api identifier", allowedvalues = {"abc", "cde"}) })
 	@ApiErrors(apierrors = { @ApiError(code = "3000", description = "City already existing"), @ApiError(code = "9000", description = "Illegal argument") })
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public @ResponseBody
 	@ApiResponseObject

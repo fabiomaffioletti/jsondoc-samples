@@ -1,8 +1,8 @@
 package org.example.shelf.flow;
 
-import org.jsondoc.core.annotation.ApiFlow;
-import org.jsondoc.core.annotation.ApiFlowSet;
-import org.jsondoc.core.annotation.ApiFlowStep;
+import org.jsondoc.core.annotation.flow.ApiFlow;
+import org.jsondoc.core.annotation.flow.ApiFlowSet;
+import org.jsondoc.core.annotation.flow.ApiFlowStep;
 
 @ApiFlowSet
 public class ShelfFlows {

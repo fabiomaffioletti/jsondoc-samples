@@ -1,18 +1,14 @@
 package org.jsondoc.sample.pojo;
 
-import org.jsondoc.core.annotation.ApiObject;
-import org.jsondoc.core.annotation.ApiObjectField;
 
-@ApiObject
 public class Hint {
 
-	@ApiObjectField
 	private Integer id;
-	@ApiObjectField(name = "my_custom_username")
+
 	private String username;
-	@ApiObjectField(name = "my_age", description = "The age of this object", required = true)
+	
 	private Integer age;
-	@ApiObjectField(description = "The gender of this object", required = false)
+	
 	private String gender;
 
 	public Hint() {

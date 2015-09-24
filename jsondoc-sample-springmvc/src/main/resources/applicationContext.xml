@@ -33,7 +33,7 @@
 			<list>
 				<value>org.jsondoc.sample.controller</value>
 				<value>org.jsondoc.sample.pojo</value>
-				<value>com.sample.external.pojo</value>
+				<value>com.sample</value>
 				<value>org.jsondoc.sample.flow</value>
 				<value>org.jsondoc.sample.global</value>
 			</list>

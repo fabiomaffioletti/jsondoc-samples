@@ -185,6 +185,7 @@
 							</packages>
 							<outputFile>${project.build.directory}/jsondoc-ui/jsondoc.json</outputFile>
 							<scanner>org.jsondoc.springmvc.scanner.Spring3JSONDocScanner</scanner>
+<!-- 							<scanner>org.jsondoc.core.scanner.DefaultJSONDocScanner</scanner> -->
 							<playgroundEnabled>true</playgroundEnabled>
 							<displayMethodAs>URI</displayMethodAs>
 						</configuration>
