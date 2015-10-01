@@ -3,6 +3,8 @@ package org.jsondoc.sample.pojo;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 import org.jsondoc.core.annotation.ApiObject;
 import org.jsondoc.core.annotation.ApiObjectField;
 import org.jsondoc.core.annotation.ApiVersion;
@@ -17,6 +19,8 @@ public class City extends Location {
 	@ApiObjectField(description = "The name of the city", allowedvalues = { "Melbourne", "Sydney", "Perth" })
 	@ApiVersion(since = "1.36", until = "1.4")
 	@XmlElement
+	@NotBlank
+	@Length(min = 5, max = 20)
 	private String name;
 
 	public City() {
