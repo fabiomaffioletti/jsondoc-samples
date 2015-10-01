@@ -21,7 +21,7 @@
 		<jsondoc.path>http://localhost:8080/api/jsondoc</jsondoc.path>
 		<jsondoc.core.log.level>debug</jsondoc.core.log.level>
 	</properties>
-	
+
 	<profiles>
 		<profile>
 			<id>distributable</id>
@@ -63,11 +63,17 @@
 			<artifactId>jsondoc-sample-external</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>5.1.3.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.el</groupId>
+			<artifactId>javax.el-api</artifactId>
+			<version>2.2.5</version>
 		</dependency>
 
 		<dependency>
@@ -112,10 +118,10 @@
 			<version>3.1.2.RELEASE</version>
 		</dependency>
 
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.codehaus.jackson</groupId> -->
-<!-- 			<artifactId>jackson-mapper-asl</artifactId> -->
-<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.codehaus.jackson</groupId> -->
+		<!-- <artifactId>jackson-mapper-asl</artifactId> -->
+		<!-- </dependency> -->
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -168,7 +174,7 @@
 					</connectors>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.jsondoc</groupId>
 				<artifactId>jsondoc-maven-plugin</artifactId>
@@ -191,7 +197,7 @@
 							</packages>
 							<outputFile>${project.build.directory}/jsondoc-ui/jsondoc.json</outputFile>
 							<scanner>org.jsondoc.springmvc.scanner.Spring3JSONDocScanner</scanner>
-<!-- 							<scanner>org.jsondoc.core.scanner.DefaultJSONDocScanner</scanner> -->
+							<!-- <scanner>org.jsondoc.core.scanner.DefaultJSONDocScanner</scanner> -->
 							<playgroundEnabled>true</playgroundEnabled>
 							<displayMethodAs>URI</displayMethodAs>
 						</configuration>
@@ -224,28 +230,28 @@
 					</execution>
 				</executions>
 			</plugin>
-			
+
 			<plugin>
-	            <groupId>com.google.code.maven-replacer-plugin</groupId>
-	            <artifactId>replacer</artifactId>
-	            <version>1.5.3</version>
-	            <executions>                
-	                <execution>
-	                    <phase>package</phase>
-	                    <goals>
-	                        <goal>replace</goal>
-	                    </goals>
-	                </execution>
-	            </executions>
-	            <configuration>
-	                <includes>
-	                    <include>${project.build.directory}/jsondoc-ui/jsondoc-ui.html</include>
-	                </includes>
-	                <token>'_JSONDOC_OFFLINE_PLACEHOLDER_'</token> <!-- Do not change this value -->
-	                <valueFile>${project.build.directory}/jsondoc-ui/jsondoc.json</valueFile>
-	            </configuration>
-	        </plugin>
-			
+				<groupId>com.google.code.maven-replacer-plugin</groupId>
+				<artifactId>replacer</artifactId>
+				<version>1.5.3</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>replace</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<includes>
+						<include>${project.build.directory}/jsondoc-ui/jsondoc-ui.html</include>
+					</includes>
+					<token>'_JSONDOC_OFFLINE_PLACEHOLDER_'</token> <!-- Do not change this value -->
+					<valueFile>${project.build.directory}/jsondoc-ui/jsondoc.json</valueFile>
+				</configuration>
+			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
