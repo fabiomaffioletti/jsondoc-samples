@@ -6,6 +6,7 @@ import org.example.shelf.flow.ShelfFlowConstants;
 import org.example.shelf.model.Author;
 import org.example.shelf.repository.AuthorRepository;
 import org.jsondoc.core.annotation.Api;
+import org.jsondoc.core.annotation.ApiAuthToken;
 import org.jsondoc.core.annotation.ApiBodyObject;
 import org.jsondoc.core.annotation.ApiMethod;
 import org.jsondoc.core.annotation.ApiPathParam;
@@ -26,6 +27,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RestController
 @RequestMapping(value = "/authors", produces = MediaType.APPLICATION_JSON_VALUE)
 @Api(description = "The author services", name = "Author services")
+@ApiAuthToken(roles = { "*" }, testtokens = "abc", scheme = "Bearer")
 public class AuthorController {
 
 	@Autowired
