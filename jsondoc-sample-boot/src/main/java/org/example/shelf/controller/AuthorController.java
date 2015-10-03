@@ -34,6 +34,7 @@ public class AuthorController {
 	private AuthorRepository authorRepository;
 
 	@ApiMethod(id = ShelfFlowConstants.AUTHOR_FIND_ONE)
+	@ApiAuthToken
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public @ApiResponseObject Author findOne(@ApiPathParam(name = "id") @PathVariable Long id) {
 		return authorRepository.findOne(id);
