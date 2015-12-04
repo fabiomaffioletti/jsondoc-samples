@@ -1,4 +1,4 @@
-package org.example.shelf.global;
+package org.example.shelf.documentation.global;
 
 import org.jsondoc.core.annotation.global.ApiChangelog;
 import org.jsondoc.core.annotation.global.ApiChangelogSet;

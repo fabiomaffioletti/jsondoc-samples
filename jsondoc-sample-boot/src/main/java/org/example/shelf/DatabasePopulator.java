@@ -2,11 +2,14 @@ package org.example.shelf;
 
 import org.example.shelf.model.Author;
 import org.example.shelf.model.Book;
+import org.example.shelf.model.User;
 import org.example.shelf.repository.AuthorRepository;
-import org.example.shelf.repository.BookRepository;
+import org.example.shelf.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
+
+import com.google.common.collect.Lists;
 
 @Configuration
 public class DatabasePopulator implements CommandLineRunner {
@@ -15,38 +18,22 @@ public class DatabasePopulator implements CommandLineRunner {
 	private AuthorRepository authorRepository;
 	
 	@Autowired
-	private BookRepository bookRepository;
+	private UserRepository userRepository;
 	
 	public void run(String... arg0) throws Exception {
-		Author horbny = new Author();
-		horbny.setId(1L);
-		horbny.setName("Nick Horby");
 		
-		Author smith = new Author();
-		smith.setId(2L);
-		smith.setName("Wilbur Smith");
-		
-		authorRepository.save(horbny);
+		Author hornby = Author.builder().name("Nick Horby").books(Lists.<Book>newArrayList()).build();
+		hornby.addBook(Book.builder().title("High fidelty").price(5.99D).build());
+		hornby.addBook(Book.builder().title("A long way down").price(0.99D).build());
+		Author smith = Author.builder().name("Wilbur Smith").books(Lists.<Book>newArrayList()).build();
+		smith.addBook(Book.builder().title("Desert god").price(1.99D).build());
+		authorRepository.save(hornby);
 		authorRepository.save(smith);
 		
-		Book highFidelty = new Book();
-		highFidelty.setId(1L);
-		highFidelty.setTitle("High fidelty");
-		highFidelty.setAuthor(horbny);
+		userRepository.save(User.builder().username("user-one").build());
+		userRepository.save(User.builder().username("user-two").build());
+		userRepository.save(User.builder().username("user-three").build());
 		
-		Book aLongWayDown = new Book();
-		aLongWayDown.setId(2L);
-		aLongWayDown.setTitle("A long way down");
-		aLongWayDown.setAuthor(horbny);
-
-		Book desertGod = new Book();
-		desertGod.setId(3L);
-		desertGod.setTitle("Desert god");
-		desertGod.setAuthor(smith);
-		
-		bookRepository.save(highFidelty);
-		bookRepository.save(aLongWayDown);
-		bookRepository.save(desertGod);
 	}
 
 }

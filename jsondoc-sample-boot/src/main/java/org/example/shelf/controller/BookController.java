@@ -2,7 +2,7 @@ package org.example.shelf.controller;
 
 import java.util.List;
 
-import org.example.shelf.flow.ShelfFlowConstants;
+import org.example.shelf.documentation.DocumentationConstants;
 import org.example.shelf.model.Book;
 import org.example.shelf.repository.BookRepository;
 import org.jsondoc.core.annotation.Api;
@@ -25,25 +25,25 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping(value = "/books", produces = MediaType.APPLICATION_JSON_VALUE)
-@Api(description = "The books controller", name = "Books services")
+@Api(description = "The books controller", name = "Books services", group = DocumentationConstants.GROUP_LIBRARY)
 public class BookController {
 	
 	@Autowired
 	private BookRepository bookRepository;
 	
-	@ApiMethod(id = ShelfFlowConstants.BOOK_FIND_ONE, summary = "Gets a book given the book ID")
+	@ApiMethod(id = DocumentationConstants.BOOK_FIND_ONE, summary = "Gets a book given the book ID")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public @ApiResponseObject Book findOne(@ApiPathParam(name = "id") @PathVariable Long id) {
 		return bookRepository.findOne(id);
 	}
 	
-	@ApiMethod(id = ShelfFlowConstants.BOOK_FIND_ALL)
+	@ApiMethod(id = DocumentationConstants.BOOK_FIND_ALL)
 	@RequestMapping(method = RequestMethod.GET)
 	public @ApiResponseObject List<Book> findAll() {
 		return bookRepository.findAll();
 	}
 	
-	@ApiMethod(id = ShelfFlowConstants.BOOK_SAVE)
+	@ApiMethod(id = DocumentationConstants.BOOK_SAVE)
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public @ApiResponseObject ResponseEntity<Void> save(@ApiBodyObject @RequestBody Book book, UriComponentsBuilder uriComponentsBuilder) {
@@ -54,7 +54,7 @@ public class BookController {
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 	
-	@ApiMethod(id = ShelfFlowConstants.BOOK_DELETE)
+	@ApiMethod(id = DocumentationConstants.BOOK_DELETE)
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	@ResponseStatus(value = HttpStatus.OK)
 	public void delete(@ApiPathParam(name = "id") @PathVariable Long id) {
