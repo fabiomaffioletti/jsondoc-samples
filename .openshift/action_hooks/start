@@ -2,6 +2,6 @@
 export JAVA_HOME=$OPENSHIFT_DATA_DIR/jdk1.8.0_65
 export PATH=$JAVA_HOME/bin:$PATH
 
-$OPENSHIFT_DATA_DIR/apache-maven-3.3.3/bin/mvn -f $OPENSHIFT_REPO_DIR/pom.xml clean package -s $OPENSHIFT_REPO_DIR/.openshift/settings.xml
+$OPENSHIFT_DATA_DIR/apache-maven-3.3.3/bin/mvn -f $OPENSHIFT_REPO_DIR/jsondoc-sample-boot/pom.xml clean package -Popenshift -s $OPENSHIFT_REPO_DIR/.openshift/settings.xml
 
-nohup java -jar -Dserver.port=${OPENSHIFT_DIY_PORT} -Dserver.address=${OPENSHIFT_DIY_IP} $OPENSHIFT_REPO_DIR/jsondoc-sample-boot/target/jsondoc-sample-boot-0.0.1-SNAPSHOT.jar > ${OPENSHIFT_DIY_LOG_DIR}/jsondoc.log 2>&1 &
+nohup java -jar -Dserver.port=${OPENSHIFT_DIY_PORT} -Dserver.address=${OPENSHIFT_DIY_IP} $OPENSHIFT_REPO_DIR/jsondoc-sample-boot/target/*.jar > ${OPENSHIFT_DIY_LOG_DIR}/jsondoc.log 2>&1 &
