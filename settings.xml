@@ -4,6 +4,9 @@
             <id>docker-hub</id>
             <username>${DOCKER_USER}</username>
             <password>${DOCKER_PASS}</password>
+            <configuration>
+                <email>${DOCKER_EMAIL}</email>
+            </configuration>
         </server>
     </servers>
 </settings>

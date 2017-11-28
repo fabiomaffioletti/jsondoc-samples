@@ -68,6 +68,7 @@
 					</execution>
 				</executions>
 				<configuration>
+					<serverId>docker-hub</serverId>
 					<imageName>fabiomaffioletti/${project.name}</imageName>
 					<baseImage>java</baseImage>
 					<entryPoint>["sh", "-c", "java -Djava.security.egd=file:/dev/urandom -jar /${project.build.finalName}.jar"]</entryPoint>
