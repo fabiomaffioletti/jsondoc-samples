@@ -83,7 +83,7 @@
 						<imageTag>${project.version}</imageTag>
 						<imageTag>latest</imageTag>
 					</imageTags>
-					<!--<pushImage>true</pushImage>-->
+					<pushImage>true</pushImage>
 				</configuration>
 			</plugin>
 		</plugins>
