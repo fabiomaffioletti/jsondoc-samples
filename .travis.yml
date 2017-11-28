@@ -2,5 +2,7 @@ language: java
 jdk:
   - oraclejdk8
 
+# install: true skips the default mvn test command run by travis
 install: true
+# here is the custom script to be run by travis
 script: mvn clean package --settings settings.xml
