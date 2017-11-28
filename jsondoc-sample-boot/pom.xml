@@ -11,7 +11,7 @@
 
 	<groupId>org.example</groupId>
 	<artifactId>jsondoc-sample-boot</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>${maven.build.timestamp}</version>
 	<packaging>jar</packaging>
 
 	<name>jsondoc-sample-boot</name>
@@ -20,8 +20,9 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jsondoc.basePath>http://localhost:8080</jsondoc.basePath>
+		<maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
 	</properties>
-	
+
 	<profiles>
 		<profile>
 			<id>openshift</id>
@@ -32,6 +33,7 @@
 	</profiles>
 
 	<build>
+
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -49,12 +51,43 @@
 					<execution>
 						<goals>
 							<goal>repackage</goal>
-						</goals>	
+						</goals>
 					</execution>
 				</executions>
-			</plugin>			
+			</plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>build-image</id>
+						<phase>package</phase>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<serverId>docker-hub</serverId>
+					<imageName>fabiomaffioletti/${project.name}</imageName>
+					<baseImage>java</baseImage>
+					<entryPoint>["sh", "-c", "java -Djava.security.egd=file:/dev/urandom -jar /${project.build.finalName}.jar"]</entryPoint>
+					<resources>
+						<resource>
+							<targetPath>/</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
+					<imageTags>
+						<imageTag>${project.version}</imageTag>
+						<imageTag>latest</imageTag>
+					</imageTags>
+					<!--<pushImage>true</pushImage>-->
+				</configuration>
+			</plugin>
 		</plugins>
-		
+
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
@@ -62,7 +95,7 @@
 			</resource>
 		</resources>
 	</build>
-	
+
 	<dependencies>
 
 		<dependency>
