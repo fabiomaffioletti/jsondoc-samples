@@ -20,7 +20,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jsondoc.version>1.2.19</jsondoc.version>
+		<jsondoc.version>1.2.21</jsondoc.version>
 	</properties>
 
 	<repositories>
