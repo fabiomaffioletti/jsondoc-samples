@@ -1,6 +1,6 @@
 language: java
 jdk:
-  - oraclejdk8
+  - openjdk8
 
 # install: true skips the default mvn test command run by travis
 install: true
